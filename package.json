@@ -1,0 +1,23 @@
+{
+  "name": "node-proxy",
+  "version": "0.0.1",
+  "description": "A Node.js Version of PHP-Proxy",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Plasma2450/Node-Proxy.git"
+  },
+  "author": "Joss Bird",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Plasma2450/Node-Proxy/issues"
+  },
+  "homepage": "https://github.com/Plasma2450/Node-Proxy#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "request": "^2.88.0"
+  }
+}
