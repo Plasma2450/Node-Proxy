@@ -24,7 +24,7 @@ webInterface.get('/get/:url', (req, res) => {
 
         if(redirect)
         {
-            res.redirect(301, 'http://localhost/get/' + Buffer.from(redirectLocation,'utf8').toString('hex'));
+            res.redirect(302, 'http://localhost/get/' + Buffer.from(redirectLocation,'utf8').toString('hex'));
         }
 
         url = url.split('?')[0];
@@ -47,7 +47,7 @@ webInterface.get('/get/:url', (req, res) => {
             for(let i = 0; i < tempMatches.length; i++)
             {
                 tempMatches[i] = tempMatches[i].split(' ')[0];
-                let strippedString = tempMatches[i].replace('"', '').replace('"', '');
+                let strippedString = tempMatches[i].replace('"', '').rfeplace('"', '');
                 if(strippedString.substr(0, 2) != '//' && strippedString.indexOf('\\') == -1 && strippedString.length != 1)
                 {
                     //console.log('old='+tempMatches[i]); 
@@ -73,7 +73,7 @@ webInterface.get('/get/:url', (req, res) => {
     request
     .get(url, {headers: {'user-agent': req.headers['user-agent']}, followRedirect: false})
     .on('response', (response) =>{
-        if(response.statusCode == '301')
+        if(response.statusCode == '301' || response.statusCode == '302')
         {
             redirect = true;
             redirectLocation = response.headers.location;
