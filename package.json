@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/Plasma2450/Node-Proxy#readme",
   "dependencies": {
+    "concat-stream": "^1.6.2",
     "express": "^4.16.3",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "url-regex": "^4.1.1"
   }
 }
