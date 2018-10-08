@@ -9,9 +9,12 @@ const request       = require('request');
 const urlRegex      = require('url-regex');
 const concat        = require('concat-stream');
 
+const domain        = 'localhost';
+const protocol      = 'http';
+
 webInterface.listen(80, console.log(`[*] Started web interface on port ${80}`));
 
-webInterface.get('/get/:url', (req, res) => {
+webInterface.get('/url/:url', (req, res) => {
 
     let redirect = false;
     let redirectLocation = null;
@@ -24,7 +27,7 @@ webInterface.get('/get/:url', (req, res) => {
 
         if(redirect)
         {
-            res.redirect(302, 'http://localhost/get/' + Buffer.from(redirectLocation,'utf8').toString('hex'));
+            res.redirect(302, protocol + '://'+domain + '/url/' + Buffer.from(redirectLocation,'utf8').toString('hex'));
         }
 
         url = url.split('?')[0];
@@ -47,12 +50,12 @@ webInterface.get('/get/:url', (req, res) => {
             for(let i = 0; i < tempMatches.length; i++)
             {
                 tempMatches[i] = tempMatches[i].split(' ')[0];
-                let strippedString = tempMatches[i].replace('"', '').rfeplace('"', '');
+                let strippedString = tempMatches[i].replace('"', '').replace('"', '');
                 if(strippedString.substr(0, 2) != '//' && strippedString.indexOf('\\') == -1 && strippedString.length != 1)
                 {
                     //console.log('old='+tempMatches[i]); 
                     //console.log('new='+url+strippedString);
-                    response = response.replace(strippedString, 'http://localhost/get/' + Buffer.from(url + strippedString, 'utf8').toString('hex'));
+                    response = response.replace(strippedString, protocol + '://' + domain + '/url/' + Buffer.from(url + strippedString, 'utf8').toString('hex'));
                 }
             }
 
